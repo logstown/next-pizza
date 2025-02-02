@@ -1,51 +1,44 @@
-import type React from "react"
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { X } from "lucide-react"
+import type React from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { X } from "lucide-react";
 
 interface SettingsModalProps {
-  toppings: string[]
-  onUpdateToppings: (newToppings: string[]) => void
-  triggerButton: React.ReactNode
+  toppings: string[];
+  onUpdateToppings: (newToppings: string[]) => void;
+  triggerButton: React.ReactNode;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({ toppings, onUpdateToppings, triggerButton }) => {
-  const [open, setOpen] = useState(false)
-  const [currentToppings, setCurrentToppings] = useState<string[]>(toppings)
-  const [newTopping, setNewTopping] = useState("")
+  const [open, setOpen] = useState(false);
+  const [currentToppings, setCurrentToppings] = useState<string[]>(toppings);
+  const [newTopping, setNewTopping] = useState("");
 
   // Reset currentToppings when the modal opens
   useEffect(() => {
     if (open) {
-      setCurrentToppings([...toppings])
+      setCurrentToppings([...toppings]);
     }
-  }, [open, toppings])
+  }, [open, toppings]);
 
   const handleAddTopping = () => {
     if (newTopping && !currentToppings.includes(newTopping)) {
-      setCurrentToppings([...currentToppings, newTopping])
-      setNewTopping("")
+      setCurrentToppings([...currentToppings, newTopping]);
+      setNewTopping("");
     }
-  }
+  };
 
   const handleRemoveTopping = (topping: string) => {
-    setCurrentToppings(currentToppings.filter((t) => t !== topping))
-  }
+    setCurrentToppings(currentToppings.filter((t) => t !== topping));
+  };
 
   const handleSave = () => {
-    onUpdateToppings(currentToppings)
-    setOpen(false)
-  }
+    onUpdateToppings(currentToppings);
+    setOpen(false);
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -53,9 +46,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ toppings, onUpdate
       <DialogContent className="sm:max-w-[425px] bg-card text-card-foreground">
         <DialogHeader>
           <DialogTitle className="text-primary">Pizza Toppings Settings</DialogTitle>
-          <DialogDescription className="text-muted-foreground">
-            Customize the list of available pizza toppings.
-          </DialogDescription>
+          <DialogDescription className="text-muted-foreground">Customize the list of available pizza toppings.</DialogDescription>
         </DialogHeader>
         <div className="flex items-center space-x-2">
           <Input
@@ -88,6 +79,5 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ toppings, onUpdate
         </div>
       </DialogContent>
     </Dialog>
-  )
-}
-
+  );
+};

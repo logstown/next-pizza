@@ -1,9 +1,9 @@
-import type React from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import type { PizzaOrder } from "../utils/pizzaUtils"
+import type React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { PizzaOrder } from "../utils/pizzaUtils";
 
 interface PizzaOrderDisplayProps {
-  orders: PizzaOrder[]
+  orders: PizzaOrder[];
 }
 
 export const PizzaOrderDisplay: React.FC<PizzaOrderDisplayProps> = ({ orders }) => {
@@ -26,6 +26,5 @@ export const PizzaOrderDisplay: React.FC<PizzaOrderDisplayProps> = ({ orders }) 
         </Card>
       ))}
     </div>
-  )
-}
-
+  );
+};

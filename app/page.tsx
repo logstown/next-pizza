@@ -1,45 +1,39 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { PreferenceModal } from "../components/PreferenceModal"
-import { SettingsModal } from "../components/SettingsModal"
-import { PizzaOrderDisplay } from "../components/PizzaOrderDisplay"
-import {
-  type UserPreference,
-  generatePizzaOrder,
-  type PizzaOrder,
-  getAllToppings,
-  updateToppings,
-} from "../utils/pizzaUtils"
-import { Button } from "@/components/ui/button"
-import { Pencil, Trash2, Settings } from "lucide-react"
+import { useState } from "react";
+import { PreferenceModal } from "../components/PreferenceModal";
+import { SettingsModal } from "../components/SettingsModal";
+import { PizzaOrderDisplay } from "../components/PizzaOrderDisplay";
+import { type UserPreference, generatePizzaOrder, type PizzaOrder, getAllToppings, updateToppings } from "../utils/pizzaUtils";
+import { Button } from "@/components/ui/button";
+import { Pencil, Trash2, Settings } from "lucide-react";
 
 export default function PizzaOrderApp() {
-  const [userPreferences, setUserPreferences] = useState<UserPreference[]>([])
-  const [pizzaOrder, setPizzaOrder] = useState<PizzaOrder[]>([])
-  const [toppings, setToppings] = useState(getAllToppings())
+  const [userPreferences, setUserPreferences] = useState<UserPreference[]>([]);
+  const [pizzaOrder, setPizzaOrder] = useState<PizzaOrder[]>([]);
+  const [toppings, setToppings] = useState(getAllToppings());
 
   const handleAddUserPreference = (preference: UserPreference) => {
-    setUserPreferences((prev) => [...prev, preference])
-  }
+    setUserPreferences((prev) => [...prev, preference]);
+  };
 
   const handleEditUserPreference = (editedPreference: UserPreference) => {
-    setUserPreferences((prev) => prev.map((pref) => (pref.id === editedPreference.id ? editedPreference : pref)))
-  }
+    setUserPreferences((prev) => prev.map((pref) => (pref.id === editedPreference.id ? editedPreference : pref)));
+  };
 
   const handleDeleteUserPreference = (id: number) => {
-    setUserPreferences((prev) => prev.filter((pref) => pref.id !== id))
-  }
+    setUserPreferences((prev) => prev.filter((pref) => pref.id !== id));
+  };
 
   const handleGenerateOrder = () => {
-    const order = generatePizzaOrder(userPreferences)
-    setPizzaOrder(order)
-  }
+    const order = generatePizzaOrder(userPreferences);
+    setPizzaOrder(order);
+  };
 
   const handleUpdateToppings = (newToppings: string[]) => {
-    setToppings(newToppings)
-    updateToppings(newToppings)
-  }
+    setToppings(newToppings);
+    updateToppings(newToppings);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -100,6 +94,5 @@ export default function PizzaOrderApp() {
         {pizzaOrder.length > 0 && <PizzaOrderDisplay orders={pizzaOrder} />}
       </div>
     </div>
-  )
+  );
 }
-
